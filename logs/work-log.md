@@ -2,19 +2,23 @@
 
 ## 2026-11-13
 - Kit fetched; RULES.txt + kit.json read. Entry `main.py` <=4,096 B.
-- Built 0x88 engine (`dev.py`): negamax + alpha-beta, TT, killers,
-  MVV-LVA, LMR, quiescence, incremental material + formula PST.
-- Perft all OK (startpos d4 197281, kiwipete d4 4085603, pos3 d5
-  674624, pos4 d4 422333, pos5 d4 2103487, pos6 d4 3894594).
-- Fixed eval bug: make() ignored piece colour in the incremental
-  score. Verified ev() matches the house evaluator; root best Bd5.
-- LMR-fixed drew vs depth-2 (Italian Game, 3-fold repetition).
-- Golfed `main.py` (8,122 -> 7,453 B readable); lzma+base85 packed
-  to 4,090 B (cap 4,096). Dropped: bishop-pair, repetition detection.
+- Built 0x88 engine: negamax + alpha-beta, TT, killers, MVV-LVA,
+  LMR, quiescence, incremental material + formula PST.
+- Perft all OK (6 positions). Fixed eval bug (make() ignored piece
+  colour); ev() matches the house evaluator; root best Bd5.
+- Golfed `main.py` to 7,453 B readable; packed to 4,090 B.
+  Dropped: bishop-pair, repetition detection.
 
 ## 2026-11-14
 - Fixed driver sync bug: set up from `start_fen` + replay moves
   (was double-applying from `fen`). Trial-0 re-run.
+
+## 2026-11-17 (round 2)
+- Restored repetition detection (`Y` hash history). v_rep: 24 games,
+  13W-3D-8L = 14.5 pts, Elo mean 1,509 vs baseline 1,418 (+91).
+  New kit trial-0: Elo 1,654, 5W-0D-1L. Packed to 4,082 B.
+- Dropped variants: PVS -68, node budget 80k -138, bishop-pair -291,
+  check extension ~0.
 
 ## Results
 - Practice trial-0 (packed, NB 60000): **Elo 1,464** (3W-3D-2L).
